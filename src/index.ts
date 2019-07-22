@@ -1,25 +1,21 @@
 import express, { Request, Response } from "express";
 import * as bodyParser from "body-parser";
-import { prisma } from "./generated/prisma-client";
+
+// Routes
+import usersRoutes from "./routes/api/users";
+import authRoutes from "./routes/api/auth";
 
 const app = express();
 // Init Middleware
 
 app.use(bodyParser.json());
 
+// Define Routes
+app.use("/api/users", usersRoutes);
+app.use("/api/auth", authRoutes);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
-});
-
-app.get("/", async (req: Request, res: Response) => {
-  const users = await prisma.users({});
-  res.json(users);
-});
-
-app.post("/api/user", async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
-  const user = await prisma.createUser({ name, email, password });
-  res.json(user);
 });
