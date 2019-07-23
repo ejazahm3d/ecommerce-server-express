@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import * as bodyParser from "body-parser";
+import cors from "cors";
 
 // Routes
 import usersRoutes from "./routes/api/users";
@@ -9,6 +10,7 @@ const app = express();
 // Init Middleware
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Define Routes
 app.use("/api/users", usersRoutes);
