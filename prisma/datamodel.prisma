@@ -3,4 +3,46 @@ type User {
   name: String!
   email: String! @unique
   hash: String!
+  orders: [Order!]!
+  shippingAddress: Address!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Product {
+  id: ID! @id
+  name: String!
+  desc: String!
+  price: Float!
+  image: Image!
+    @relation(name: "ImageToProduct", link: INLINE, ondelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Image {
+  id: ID! @id
+  product: Product! @relation(name: "ImageToProduct")
+  src: String!
+  alt: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Order {
+  id: ID! @id
+  product: Product!
+  quantity: Int!
+  subTotal: Float!
+  user: User!
+  shippingAddress: Address!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Address {
+  id: ID! @id
+  address: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

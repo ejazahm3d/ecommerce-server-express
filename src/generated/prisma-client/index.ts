@@ -16,6 +16,10 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  address: (where?: AddressWhereInput) => Promise<boolean>;
+  image: (where?: ImageWhereInput) => Promise<boolean>;
+  order: (where?: OrderWhereInput) => Promise<boolean>;
+  product: (where?: ProductWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -38,6 +42,82 @@ export interface Prisma {
    * Queries
    */
 
+  address: (where: AddressWhereUniqueInput) => AddressNullablePromise;
+  addresses: (args?: {
+    where?: AddressWhereInput;
+    orderBy?: AddressOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Address>;
+  addressesConnection: (args?: {
+    where?: AddressWhereInput;
+    orderBy?: AddressOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => AddressConnectionPromise;
+  image: (where: ImageWhereUniqueInput) => ImageNullablePromise;
+  images: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Image>;
+  imagesConnection: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ImageConnectionPromise;
+  order: (where: OrderWhereUniqueInput) => OrderNullablePromise;
+  orders: (args?: {
+    where?: OrderWhereInput;
+    orderBy?: OrderOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Order>;
+  ordersConnection: (args?: {
+    where?: OrderWhereInput;
+    orderBy?: OrderOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => OrderConnectionPromise;
+  product: (where: ProductWhereUniqueInput) => ProductNullablePromise;
+  products: (args?: {
+    where?: ProductWhereInput;
+    orderBy?: ProductOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Product>;
+  productsConnection: (args?: {
+    where?: ProductWhereInput;
+    orderBy?: ProductOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ProductConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -63,6 +143,70 @@ export interface Prisma {
    * Mutations
    */
 
+  createAddress: (data: AddressCreateInput) => AddressPromise;
+  updateAddress: (args: {
+    data: AddressUpdateInput;
+    where: AddressWhereUniqueInput;
+  }) => AddressPromise;
+  updateManyAddresses: (args: {
+    data: AddressUpdateManyMutationInput;
+    where?: AddressWhereInput;
+  }) => BatchPayloadPromise;
+  upsertAddress: (args: {
+    where: AddressWhereUniqueInput;
+    create: AddressCreateInput;
+    update: AddressUpdateInput;
+  }) => AddressPromise;
+  deleteAddress: (where: AddressWhereUniqueInput) => AddressPromise;
+  deleteManyAddresses: (where?: AddressWhereInput) => BatchPayloadPromise;
+  createImage: (data: ImageCreateInput) => ImagePromise;
+  updateImage: (args: {
+    data: ImageUpdateInput;
+    where: ImageWhereUniqueInput;
+  }) => ImagePromise;
+  updateManyImages: (args: {
+    data: ImageUpdateManyMutationInput;
+    where?: ImageWhereInput;
+  }) => BatchPayloadPromise;
+  upsertImage: (args: {
+    where: ImageWhereUniqueInput;
+    create: ImageCreateInput;
+    update: ImageUpdateInput;
+  }) => ImagePromise;
+  deleteImage: (where: ImageWhereUniqueInput) => ImagePromise;
+  deleteManyImages: (where?: ImageWhereInput) => BatchPayloadPromise;
+  createOrder: (data: OrderCreateInput) => OrderPromise;
+  updateOrder: (args: {
+    data: OrderUpdateInput;
+    where: OrderWhereUniqueInput;
+  }) => OrderPromise;
+  updateManyOrders: (args: {
+    data: OrderUpdateManyMutationInput;
+    where?: OrderWhereInput;
+  }) => BatchPayloadPromise;
+  upsertOrder: (args: {
+    where: OrderWhereUniqueInput;
+    create: OrderCreateInput;
+    update: OrderUpdateInput;
+  }) => OrderPromise;
+  deleteOrder: (where: OrderWhereUniqueInput) => OrderPromise;
+  deleteManyOrders: (where?: OrderWhereInput) => BatchPayloadPromise;
+  createProduct: (data: ProductCreateInput) => ProductPromise;
+  updateProduct: (args: {
+    data: ProductUpdateInput;
+    where: ProductWhereUniqueInput;
+  }) => ProductPromise;
+  updateManyProducts: (args: {
+    data: ProductUpdateManyMutationInput;
+    where?: ProductWhereInput;
+  }) => BatchPayloadPromise;
+  upsertProduct: (args: {
+    where: ProductWhereUniqueInput;
+    create: ProductCreateInput;
+    update: ProductUpdateInput;
+  }) => ProductPromise;
+  deleteProduct: (where: ProductWhereUniqueInput) => ProductPromise;
+  deleteManyProducts: (where?: ProductWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -88,6 +232,18 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  address: (
+    where?: AddressSubscriptionWhereInput
+  ) => AddressSubscriptionPayloadSubscription;
+  image: (
+    where?: ImageSubscriptionWhereInput
+  ) => ImageSubscriptionPayloadSubscription;
+  order: (
+    where?: OrderSubscriptionWhereInput
+  ) => OrderSubscriptionPayloadSubscription;
+  product: (
+    where?: ProductSubscriptionWhereInput
+  ) => ProductSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -101,6 +257,54 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type AddressOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "address_ASC"
+  | "address_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ImageOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "src_ASC"
+  | "src_DESC"
+  | "alt_ASC"
+  | "alt_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type OrderOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC"
+  | "subTotal_ASC"
+  | "subTotal_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ProductOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "desc_ASC"
+  | "desc_DESC"
+  | "price_ASC"
+  | "price_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -109,14 +313,268 @@ export type UserOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "hash_ASC"
-  | "hash_DESC";
+  | "hash_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type UserWhereUniqueInput = AtLeastOne<{
+export type AddressWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  email?: Maybe<String>;
 }>;
+
+export interface AddressWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<AddressWhereInput[] | AddressWhereInput>;
+  OR?: Maybe<AddressWhereInput[] | AddressWhereInput>;
+  NOT?: Maybe<AddressWhereInput[] | AddressWhereInput>;
+}
+
+export type ImageWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ImageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  product?: Maybe<ProductWhereInput>;
+  src?: Maybe<String>;
+  src_not?: Maybe<String>;
+  src_in?: Maybe<String[] | String>;
+  src_not_in?: Maybe<String[] | String>;
+  src_lt?: Maybe<String>;
+  src_lte?: Maybe<String>;
+  src_gt?: Maybe<String>;
+  src_gte?: Maybe<String>;
+  src_contains?: Maybe<String>;
+  src_not_contains?: Maybe<String>;
+  src_starts_with?: Maybe<String>;
+  src_not_starts_with?: Maybe<String>;
+  src_ends_with?: Maybe<String>;
+  src_not_ends_with?: Maybe<String>;
+  alt?: Maybe<String>;
+  alt_not?: Maybe<String>;
+  alt_in?: Maybe<String[] | String>;
+  alt_not_in?: Maybe<String[] | String>;
+  alt_lt?: Maybe<String>;
+  alt_lte?: Maybe<String>;
+  alt_gt?: Maybe<String>;
+  alt_gte?: Maybe<String>;
+  alt_contains?: Maybe<String>;
+  alt_not_contains?: Maybe<String>;
+  alt_starts_with?: Maybe<String>;
+  alt_not_starts_with?: Maybe<String>;
+  alt_ends_with?: Maybe<String>;
+  alt_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  OR?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  NOT?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+}
+
+export interface ProductWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  desc?: Maybe<String>;
+  desc_not?: Maybe<String>;
+  desc_in?: Maybe<String[] | String>;
+  desc_not_in?: Maybe<String[] | String>;
+  desc_lt?: Maybe<String>;
+  desc_lte?: Maybe<String>;
+  desc_gt?: Maybe<String>;
+  desc_gte?: Maybe<String>;
+  desc_contains?: Maybe<String>;
+  desc_not_contains?: Maybe<String>;
+  desc_starts_with?: Maybe<String>;
+  desc_not_starts_with?: Maybe<String>;
+  desc_ends_with?: Maybe<String>;
+  desc_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  image?: Maybe<ImageWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ProductWhereInput[] | ProductWhereInput>;
+  OR?: Maybe<ProductWhereInput[] | ProductWhereInput>;
+  NOT?: Maybe<ProductWhereInput[] | ProductWhereInput>;
+}
+
+export type OrderWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface OrderWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  product?: Maybe<ProductWhereInput>;
+  quantity?: Maybe<Int>;
+  quantity_not?: Maybe<Int>;
+  quantity_in?: Maybe<Int[] | Int>;
+  quantity_not_in?: Maybe<Int[] | Int>;
+  quantity_lt?: Maybe<Int>;
+  quantity_lte?: Maybe<Int>;
+  quantity_gt?: Maybe<Int>;
+  quantity_gte?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
+  subTotal_not?: Maybe<Float>;
+  subTotal_in?: Maybe<Float[] | Float>;
+  subTotal_not_in?: Maybe<Float[] | Float>;
+  subTotal_lt?: Maybe<Float>;
+  subTotal_lte?: Maybe<Float>;
+  subTotal_gt?: Maybe<Float>;
+  subTotal_gte?: Maybe<Float>;
+  user?: Maybe<UserWhereInput>;
+  shippingAddress?: Maybe<AddressWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<OrderWhereInput[] | OrderWhereInput>;
+  OR?: Maybe<OrderWhereInput[] | OrderWhereInput>;
+  NOT?: Maybe<OrderWhereInput[] | OrderWhereInput>;
+}
 
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
@@ -175,9 +633,247 @@ export interface UserWhereInput {
   hash_not_starts_with?: Maybe<String>;
   hash_ends_with?: Maybe<String>;
   hash_not_ends_with?: Maybe<String>;
+  orders_every?: Maybe<OrderWhereInput>;
+  orders_some?: Maybe<OrderWhereInput>;
+  orders_none?: Maybe<OrderWhereInput>;
+  shippingAddress?: Maybe<AddressWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export type ProductWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface AddressCreateInput {
+  id?: Maybe<ID_Input>;
+  address: String;
+}
+
+export interface AddressUpdateInput {
+  address?: Maybe<String>;
+}
+
+export interface AddressUpdateManyMutationInput {
+  address?: Maybe<String>;
+}
+
+export interface ImageCreateInput {
+  id?: Maybe<ID_Input>;
+  product: ProductCreateOneWithoutImageInput;
+  src: String;
+  alt: String;
+}
+
+export interface ProductCreateOneWithoutImageInput {
+  create?: Maybe<ProductCreateWithoutImageInput>;
+  connect?: Maybe<ProductWhereUniqueInput>;
+}
+
+export interface ProductCreateWithoutImageInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  desc: String;
+  price: Float;
+}
+
+export interface ImageUpdateInput {
+  product?: Maybe<ProductUpdateOneRequiredWithoutImageInput>;
+  src?: Maybe<String>;
+  alt?: Maybe<String>;
+}
+
+export interface ProductUpdateOneRequiredWithoutImageInput {
+  create?: Maybe<ProductCreateWithoutImageInput>;
+  update?: Maybe<ProductUpdateWithoutImageDataInput>;
+  upsert?: Maybe<ProductUpsertWithoutImageInput>;
+  connect?: Maybe<ProductWhereUniqueInput>;
+}
+
+export interface ProductUpdateWithoutImageDataInput {
+  name?: Maybe<String>;
+  desc?: Maybe<String>;
+  price?: Maybe<Float>;
+}
+
+export interface ProductUpsertWithoutImageInput {
+  update: ProductUpdateWithoutImageDataInput;
+  create: ProductCreateWithoutImageInput;
+}
+
+export interface ImageUpdateManyMutationInput {
+  src?: Maybe<String>;
+  alt?: Maybe<String>;
+}
+
+export interface OrderCreateInput {
+  id?: Maybe<ID_Input>;
+  product: ProductCreateOneInput;
+  quantity: Int;
+  subTotal: Float;
+  user: UserCreateOneWithoutOrdersInput;
+  shippingAddress: AddressCreateOneInput;
+}
+
+export interface ProductCreateOneInput {
+  create?: Maybe<ProductCreateInput>;
+  connect?: Maybe<ProductWhereUniqueInput>;
+}
+
+export interface ProductCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  desc: String;
+  price: Float;
+  image: ImageCreateOneWithoutProductInput;
+}
+
+export interface ImageCreateOneWithoutProductInput {
+  create?: Maybe<ImageCreateWithoutProductInput>;
+  connect?: Maybe<ImageWhereUniqueInput>;
+}
+
+export interface ImageCreateWithoutProductInput {
+  id?: Maybe<ID_Input>;
+  src: String;
+  alt: String;
+}
+
+export interface UserCreateOneWithoutOrdersInput {
+  create?: Maybe<UserCreateWithoutOrdersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutOrdersInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  hash: String;
+  shippingAddress: AddressCreateOneInput;
+}
+
+export interface AddressCreateOneInput {
+  create?: Maybe<AddressCreateInput>;
+  connect?: Maybe<AddressWhereUniqueInput>;
+}
+
+export interface OrderUpdateInput {
+  product?: Maybe<ProductUpdateOneRequiredInput>;
+  quantity?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
+  user?: Maybe<UserUpdateOneRequiredWithoutOrdersInput>;
+  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+}
+
+export interface ProductUpdateOneRequiredInput {
+  create?: Maybe<ProductCreateInput>;
+  update?: Maybe<ProductUpdateDataInput>;
+  upsert?: Maybe<ProductUpsertNestedInput>;
+  connect?: Maybe<ProductWhereUniqueInput>;
+}
+
+export interface ProductUpdateDataInput {
+  name?: Maybe<String>;
+  desc?: Maybe<String>;
+  price?: Maybe<Float>;
+  image?: Maybe<ImageUpdateOneRequiredWithoutProductInput>;
+}
+
+export interface ImageUpdateOneRequiredWithoutProductInput {
+  create?: Maybe<ImageCreateWithoutProductInput>;
+  update?: Maybe<ImageUpdateWithoutProductDataInput>;
+  upsert?: Maybe<ImageUpsertWithoutProductInput>;
+  connect?: Maybe<ImageWhereUniqueInput>;
+}
+
+export interface ImageUpdateWithoutProductDataInput {
+  src?: Maybe<String>;
+  alt?: Maybe<String>;
+}
+
+export interface ImageUpsertWithoutProductInput {
+  update: ImageUpdateWithoutProductDataInput;
+  create: ImageCreateWithoutProductInput;
+}
+
+export interface ProductUpsertNestedInput {
+  update: ProductUpdateDataInput;
+  create: ProductCreateInput;
+}
+
+export interface UserUpdateOneRequiredWithoutOrdersInput {
+  create?: Maybe<UserCreateWithoutOrdersInput>;
+  update?: Maybe<UserUpdateWithoutOrdersDataInput>;
+  upsert?: Maybe<UserUpsertWithoutOrdersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutOrdersDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  hash?: Maybe<String>;
+  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+}
+
+export interface AddressUpdateOneRequiredInput {
+  create?: Maybe<AddressCreateInput>;
+  update?: Maybe<AddressUpdateDataInput>;
+  upsert?: Maybe<AddressUpsertNestedInput>;
+  connect?: Maybe<AddressWhereUniqueInput>;
+}
+
+export interface AddressUpdateDataInput {
+  address?: Maybe<String>;
+}
+
+export interface AddressUpsertNestedInput {
+  update: AddressUpdateDataInput;
+  create: AddressCreateInput;
+}
+
+export interface UserUpsertWithoutOrdersInput {
+  update: UserUpdateWithoutOrdersDataInput;
+  create: UserCreateWithoutOrdersInput;
+}
+
+export interface OrderUpdateManyMutationInput {
+  quantity?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
+}
+
+export interface ProductUpdateInput {
+  name?: Maybe<String>;
+  desc?: Maybe<String>;
+  price?: Maybe<Float>;
+  image?: Maybe<ImageUpdateOneRequiredWithoutProductInput>;
+}
+
+export interface ProductUpdateManyMutationInput {
+  name?: Maybe<String>;
+  desc?: Maybe<String>;
+  price?: Maybe<Float>;
 }
 
 export interface UserCreateInput {
@@ -185,18 +881,179 @@ export interface UserCreateInput {
   name: String;
   email: String;
   hash: String;
+  orders?: Maybe<OrderCreateManyWithoutUserInput>;
+  shippingAddress: AddressCreateOneInput;
+}
+
+export interface OrderCreateManyWithoutUserInput {
+  create?: Maybe<OrderCreateWithoutUserInput[] | OrderCreateWithoutUserInput>;
+  connect?: Maybe<OrderWhereUniqueInput[] | OrderWhereUniqueInput>;
+}
+
+export interface OrderCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  product: ProductCreateOneInput;
+  quantity: Int;
+  subTotal: Float;
+  shippingAddress: AddressCreateOneInput;
 }
 
 export interface UserUpdateInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   hash?: Maybe<String>;
+  orders?: Maybe<OrderUpdateManyWithoutUserInput>;
+  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+}
+
+export interface OrderUpdateManyWithoutUserInput {
+  create?: Maybe<OrderCreateWithoutUserInput[] | OrderCreateWithoutUserInput>;
+  delete?: Maybe<OrderWhereUniqueInput[] | OrderWhereUniqueInput>;
+  connect?: Maybe<OrderWhereUniqueInput[] | OrderWhereUniqueInput>;
+  set?: Maybe<OrderWhereUniqueInput[] | OrderWhereUniqueInput>;
+  disconnect?: Maybe<OrderWhereUniqueInput[] | OrderWhereUniqueInput>;
+  update?: Maybe<
+    | OrderUpdateWithWhereUniqueWithoutUserInput[]
+    | OrderUpdateWithWhereUniqueWithoutUserInput
+  >;
+  upsert?: Maybe<
+    | OrderUpsertWithWhereUniqueWithoutUserInput[]
+    | OrderUpsertWithWhereUniqueWithoutUserInput
+  >;
+  deleteMany?: Maybe<OrderScalarWhereInput[] | OrderScalarWhereInput>;
+  updateMany?: Maybe<
+    OrderUpdateManyWithWhereNestedInput[] | OrderUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface OrderUpdateWithWhereUniqueWithoutUserInput {
+  where: OrderWhereUniqueInput;
+  data: OrderUpdateWithoutUserDataInput;
+}
+
+export interface OrderUpdateWithoutUserDataInput {
+  product?: Maybe<ProductUpdateOneRequiredInput>;
+  quantity?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
+  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+}
+
+export interface OrderUpsertWithWhereUniqueWithoutUserInput {
+  where: OrderWhereUniqueInput;
+  update: OrderUpdateWithoutUserDataInput;
+  create: OrderCreateWithoutUserInput;
+}
+
+export interface OrderScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  quantity?: Maybe<Int>;
+  quantity_not?: Maybe<Int>;
+  quantity_in?: Maybe<Int[] | Int>;
+  quantity_not_in?: Maybe<Int[] | Int>;
+  quantity_lt?: Maybe<Int>;
+  quantity_lte?: Maybe<Int>;
+  quantity_gt?: Maybe<Int>;
+  quantity_gte?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
+  subTotal_not?: Maybe<Float>;
+  subTotal_in?: Maybe<Float[] | Float>;
+  subTotal_not_in?: Maybe<Float[] | Float>;
+  subTotal_lt?: Maybe<Float>;
+  subTotal_lte?: Maybe<Float>;
+  subTotal_gt?: Maybe<Float>;
+  subTotal_gte?: Maybe<Float>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<OrderScalarWhereInput[] | OrderScalarWhereInput>;
+  OR?: Maybe<OrderScalarWhereInput[] | OrderScalarWhereInput>;
+  NOT?: Maybe<OrderScalarWhereInput[] | OrderScalarWhereInput>;
+}
+
+export interface OrderUpdateManyWithWhereNestedInput {
+  where: OrderScalarWhereInput;
+  data: OrderUpdateManyDataInput;
+}
+
+export interface OrderUpdateManyDataInput {
+  quantity?: Maybe<Int>;
+  subTotal?: Maybe<Float>;
 }
 
 export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   hash?: Maybe<String>;
+}
+
+export interface AddressSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<AddressWhereInput>;
+  AND?: Maybe<AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput>;
+  OR?: Maybe<AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput>;
+  NOT?: Maybe<AddressSubscriptionWhereInput[] | AddressSubscriptionWhereInput>;
+}
+
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ImageWhereInput>;
+  AND?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  OR?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  NOT?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+}
+
+export interface OrderSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<OrderWhereInput>;
+  AND?: Maybe<OrderSubscriptionWhereInput[] | OrderSubscriptionWhereInput>;
+  OR?: Maybe<OrderSubscriptionWhereInput[] | OrderSubscriptionWhereInput>;
+  NOT?: Maybe<OrderSubscriptionWhereInput[] | OrderSubscriptionWhereInput>;
+}
+
+export interface ProductSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ProductWhereInput>;
+  AND?: Maybe<ProductSubscriptionWhereInput[] | ProductSubscriptionWhereInput>;
+  OR?: Maybe<ProductSubscriptionWhereInput[] | ProductSubscriptionWhereInput>;
+  NOT?: Maybe<ProductSubscriptionWhereInput[] | ProductSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -214,57 +1071,57 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface User {
+export interface Address {
   id: ID_Output;
-  name: String;
-  email: String;
-  hash: String;
+  address: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface AddressPromise extends Promise<Address>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  hash: () => Promise<String>;
+  address: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface AddressSubscription
+  extends Promise<AsyncIterator<Address>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  hash: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface AddressNullablePromise
+  extends Promise<Address | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  hash: () => Promise<String>;
+  address: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserConnection {
+export interface AddressConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: AddressEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface AddressConnectionPromise
+  extends Promise<AddressConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<AddressEdge>>() => T;
+  aggregate: <T = AggregateAddressPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface AddressConnectionSubscription
+  extends Promise<AsyncIterator<AddressConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AddressEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAddressSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -288,6 +1145,419 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AddressEdge {
+  node: Address;
+  cursor: String;
+}
+
+export interface AddressEdgePromise extends Promise<AddressEdge>, Fragmentable {
+  node: <T = AddressPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AddressEdgeSubscription
+  extends Promise<AsyncIterator<AddressEdge>>,
+    Fragmentable {
+  node: <T = AddressSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateAddress {
+  count: Int;
+}
+
+export interface AggregateAddressPromise
+  extends Promise<AggregateAddress>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAddressSubscription
+  extends Promise<AsyncIterator<AggregateAddress>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Image {
+  id: ID_Output;
+  src: String;
+  alt: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ImagePromise extends Promise<Image>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  product: <T = ProductPromise>() => T;
+  src: () => Promise<String>;
+  alt: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ImageSubscription
+  extends Promise<AsyncIterator<Image>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  product: <T = ProductSubscription>() => T;
+  src: () => Promise<AsyncIterator<String>>;
+  alt: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ImageNullablePromise
+  extends Promise<Image | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  product: <T = ProductPromise>() => T;
+  src: () => Promise<String>;
+  alt: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Product {
+  id: ID_Output;
+  name: String;
+  desc: String;
+  price: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ProductPromise extends Promise<Product>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  desc: () => Promise<String>;
+  price: () => Promise<Float>;
+  image: <T = ImagePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ProductSubscription
+  extends Promise<AsyncIterator<Product>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  desc: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  image: <T = ImageSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ProductNullablePromise
+  extends Promise<Product | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  desc: () => Promise<String>;
+  price: () => Promise<Float>;
+  image: <T = ImagePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ImageConnection {
+  pageInfo: PageInfo;
+  edges: ImageEdge[];
+}
+
+export interface ImageConnectionPromise
+  extends Promise<ImageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ImageEdge>>() => T;
+  aggregate: <T = AggregateImagePromise>() => T;
+}
+
+export interface ImageConnectionSubscription
+  extends Promise<AsyncIterator<ImageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateImageSubscription>() => T;
+}
+
+export interface ImageEdge {
+  node: Image;
+  cursor: String;
+}
+
+export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
+  node: <T = ImagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ImageEdgeSubscription
+  extends Promise<AsyncIterator<ImageEdge>>,
+    Fragmentable {
+  node: <T = ImageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateImage {
+  count: Int;
+}
+
+export interface AggregateImagePromise
+  extends Promise<AggregateImage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateImageSubscription
+  extends Promise<AsyncIterator<AggregateImage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Order {
+  id: ID_Output;
+  quantity: Int;
+  subTotal: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface OrderPromise extends Promise<Order>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  product: <T = ProductPromise>() => T;
+  quantity: () => Promise<Int>;
+  subTotal: () => Promise<Float>;
+  user: <T = UserPromise>() => T;
+  shippingAddress: <T = AddressPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface OrderSubscription
+  extends Promise<AsyncIterator<Order>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  product: <T = ProductSubscription>() => T;
+  quantity: () => Promise<AsyncIterator<Int>>;
+  subTotal: () => Promise<AsyncIterator<Float>>;
+  user: <T = UserSubscription>() => T;
+  shippingAddress: <T = AddressSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface OrderNullablePromise
+  extends Promise<Order | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  product: <T = ProductPromise>() => T;
+  quantity: () => Promise<Int>;
+  subTotal: () => Promise<Float>;
+  user: <T = UserPromise>() => T;
+  shippingAddress: <T = AddressPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface User {
+  id: ID_Output;
+  name: String;
+  email: String;
+  hash: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  hash: () => Promise<String>;
+  orders: <T = FragmentableArray<Order>>(args?: {
+    where?: OrderWhereInput;
+    orderBy?: OrderOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  shippingAddress: <T = AddressPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  hash: () => Promise<AsyncIterator<String>>;
+  orders: <T = Promise<AsyncIterator<OrderSubscription>>>(args?: {
+    where?: OrderWhereInput;
+    orderBy?: OrderOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  shippingAddress: <T = AddressSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  hash: () => Promise<String>;
+  orders: <T = FragmentableArray<Order>>(args?: {
+    where?: OrderWhereInput;
+    orderBy?: OrderOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  shippingAddress: <T = AddressPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface OrderConnection {
+  pageInfo: PageInfo;
+  edges: OrderEdge[];
+}
+
+export interface OrderConnectionPromise
+  extends Promise<OrderConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<OrderEdge>>() => T;
+  aggregate: <T = AggregateOrderPromise>() => T;
+}
+
+export interface OrderConnectionSubscription
+  extends Promise<AsyncIterator<OrderConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<OrderEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateOrderSubscription>() => T;
+}
+
+export interface OrderEdge {
+  node: Order;
+  cursor: String;
+}
+
+export interface OrderEdgePromise extends Promise<OrderEdge>, Fragmentable {
+  node: <T = OrderPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface OrderEdgeSubscription
+  extends Promise<AsyncIterator<OrderEdge>>,
+    Fragmentable {
+  node: <T = OrderSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateOrder {
+  count: Int;
+}
+
+export interface AggregateOrderPromise
+  extends Promise<AggregateOrder>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateOrderSubscription
+  extends Promise<AsyncIterator<AggregateOrder>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ProductConnection {
+  pageInfo: PageInfo;
+  edges: ProductEdge[];
+}
+
+export interface ProductConnectionPromise
+  extends Promise<ProductConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProductEdge>>() => T;
+  aggregate: <T = AggregateProductPromise>() => T;
+}
+
+export interface ProductConnectionSubscription
+  extends Promise<AsyncIterator<ProductConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProductEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProductSubscription>() => T;
+}
+
+export interface ProductEdge {
+  node: Product;
+  cursor: String;
+}
+
+export interface ProductEdgePromise extends Promise<ProductEdge>, Fragmentable {
+  node: <T = ProductPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProductEdgeSubscription
+  extends Promise<AsyncIterator<ProductEdge>>,
+    Fragmentable {
+  node: <T = ProductSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateProduct {
+  count: Int;
+}
+
+export interface AggregateProductPromise
+  extends Promise<AggregateProduct>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateProductSubscription
+  extends Promise<AsyncIterator<AggregateProduct>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface UserEdge {
@@ -339,6 +1609,218 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface AddressSubscriptionPayload {
+  mutation: MutationType;
+  node: Address;
+  updatedFields: String[];
+  previousValues: AddressPreviousValues;
+}
+
+export interface AddressSubscriptionPayloadPromise
+  extends Promise<AddressSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AddressPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AddressPreviousValuesPromise>() => T;
+}
+
+export interface AddressSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AddressSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AddressSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AddressPreviousValuesSubscription>() => T;
+}
+
+export interface AddressPreviousValues {
+  id: ID_Output;
+  address: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface AddressPreviousValuesPromise
+  extends Promise<AddressPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  address: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface AddressPreviousValuesSubscription
+  extends Promise<AsyncIterator<AddressPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  address: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ImageSubscriptionPayload {
+  mutation: MutationType;
+  node: Image;
+  updatedFields: String[];
+  previousValues: ImagePreviousValues;
+}
+
+export interface ImageSubscriptionPayloadPromise
+  extends Promise<ImageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ImagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ImagePreviousValuesPromise>() => T;
+}
+
+export interface ImageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ImageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ImageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ImagePreviousValuesSubscription>() => T;
+}
+
+export interface ImagePreviousValues {
+  id: ID_Output;
+  src: String;
+  alt: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ImagePreviousValuesPromise
+  extends Promise<ImagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  src: () => Promise<String>;
+  alt: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ImagePreviousValuesSubscription
+  extends Promise<AsyncIterator<ImagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  src: () => Promise<AsyncIterator<String>>;
+  alt: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface OrderSubscriptionPayload {
+  mutation: MutationType;
+  node: Order;
+  updatedFields: String[];
+  previousValues: OrderPreviousValues;
+}
+
+export interface OrderSubscriptionPayloadPromise
+  extends Promise<OrderSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = OrderPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = OrderPreviousValuesPromise>() => T;
+}
+
+export interface OrderSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<OrderSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = OrderSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = OrderPreviousValuesSubscription>() => T;
+}
+
+export interface OrderPreviousValues {
+  id: ID_Output;
+  quantity: Int;
+  subTotal: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface OrderPreviousValuesPromise
+  extends Promise<OrderPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  quantity: () => Promise<Int>;
+  subTotal: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface OrderPreviousValuesSubscription
+  extends Promise<AsyncIterator<OrderPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  quantity: () => Promise<AsyncIterator<Int>>;
+  subTotal: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ProductSubscriptionPayload {
+  mutation: MutationType;
+  node: Product;
+  updatedFields: String[];
+  previousValues: ProductPreviousValues;
+}
+
+export interface ProductSubscriptionPayloadPromise
+  extends Promise<ProductSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProductPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProductPreviousValuesPromise>() => T;
+}
+
+export interface ProductSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProductSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProductSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProductPreviousValuesSubscription>() => T;
+}
+
+export interface ProductPreviousValues {
+  id: ID_Output;
+  name: String;
+  desc: String;
+  price: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ProductPreviousValuesPromise
+  extends Promise<ProductPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  desc: () => Promise<String>;
+  price: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ProductPreviousValuesSubscription
+  extends Promise<AsyncIterator<ProductPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  desc: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -369,6 +1851,8 @@ export interface UserPreviousValues {
   name: String;
   email: String;
   hash: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPreviousValuesPromise
@@ -378,6 +1862,8 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   hash: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -387,6 +1873,8 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   hash: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 /*
@@ -401,6 +1889,16 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
@@ -409,6 +1907,11 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 export type Long = string;
 
@@ -419,6 +1922,22 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "User",
+    embedded: false
+  },
+  {
+    name: "Product",
+    embedded: false
+  },
+  {
+    name: "Image",
+    embedded: false
+  },
+  {
+    name: "Order",
+    embedded: false
+  },
+  {
+    name: "Address",
     embedded: false
   }
 ];
