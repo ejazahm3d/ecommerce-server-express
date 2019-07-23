@@ -78,6 +78,15 @@ input AddressUpdateManyMutationInput {
   address: String
 }
 
+input AddressUpdateOneInput {
+  create: AddressCreateInput
+  update: AddressUpdateDataInput
+  upsert: AddressUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: AddressWhereUniqueInput
+}
+
 input AddressUpdateOneRequiredInput {
   create: AddressCreateInput
   update: AddressUpdateDataInput
@@ -891,7 +900,7 @@ type User {
   email: String!
   hash: String!
   orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
-  shippingAddress: Address!
+  shippingAddress: Address
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -908,7 +917,7 @@ input UserCreateInput {
   email: String!
   hash: String!
   orders: OrderCreateManyWithoutUserInput
-  shippingAddress: AddressCreateOneInput!
+  shippingAddress: AddressCreateOneInput
 }
 
 input UserCreateOneWithoutOrdersInput {
@@ -921,7 +930,7 @@ input UserCreateWithoutOrdersInput {
   name: String!
   email: String!
   hash: String!
-  shippingAddress: AddressCreateOneInput!
+  shippingAddress: AddressCreateOneInput
 }
 
 type UserEdge {
@@ -976,7 +985,7 @@ input UserUpdateInput {
   email: String
   hash: String
   orders: OrderUpdateManyWithoutUserInput
-  shippingAddress: AddressUpdateOneRequiredInput
+  shippingAddress: AddressUpdateOneInput
 }
 
 input UserUpdateManyMutationInput {
@@ -996,7 +1005,7 @@ input UserUpdateWithoutOrdersDataInput {
   name: String
   email: String
   hash: String
-  shippingAddress: AddressUpdateOneRequiredInput
+  shippingAddress: AddressUpdateOneInput
 }
 
 input UserUpsertWithoutOrdersInput {

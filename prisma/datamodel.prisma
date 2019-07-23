@@ -3,8 +3,8 @@ type User {
   name: String!
   email: String! @unique
   hash: String!
-  orders: [Order!]!
-  shippingAddress: Address!
+  orders: [Order!]
+  shippingAddress: Address
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

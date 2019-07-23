@@ -771,7 +771,7 @@ export interface UserCreateWithoutOrdersInput {
   name: String;
   email: String;
   hash: String;
-  shippingAddress: AddressCreateOneInput;
+  shippingAddress?: Maybe<AddressCreateOneInput>;
 }
 
 export interface AddressCreateOneInput {
@@ -834,13 +834,15 @@ export interface UserUpdateWithoutOrdersDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   hash?: Maybe<String>;
-  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+  shippingAddress?: Maybe<AddressUpdateOneInput>;
 }
 
-export interface AddressUpdateOneRequiredInput {
+export interface AddressUpdateOneInput {
   create?: Maybe<AddressCreateInput>;
   update?: Maybe<AddressUpdateDataInput>;
   upsert?: Maybe<AddressUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<AddressWhereUniqueInput>;
 }
 
@@ -856,6 +858,13 @@ export interface AddressUpsertNestedInput {
 export interface UserUpsertWithoutOrdersInput {
   update: UserUpdateWithoutOrdersDataInput;
   create: UserCreateWithoutOrdersInput;
+}
+
+export interface AddressUpdateOneRequiredInput {
+  create?: Maybe<AddressCreateInput>;
+  update?: Maybe<AddressUpdateDataInput>;
+  upsert?: Maybe<AddressUpsertNestedInput>;
+  connect?: Maybe<AddressWhereUniqueInput>;
 }
 
 export interface OrderUpdateManyMutationInput {
@@ -882,7 +891,7 @@ export interface UserCreateInput {
   email: String;
   hash: String;
   orders?: Maybe<OrderCreateManyWithoutUserInput>;
-  shippingAddress: AddressCreateOneInput;
+  shippingAddress?: Maybe<AddressCreateOneInput>;
 }
 
 export interface OrderCreateManyWithoutUserInput {
@@ -903,7 +912,7 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   hash?: Maybe<String>;
   orders?: Maybe<OrderUpdateManyWithoutUserInput>;
-  shippingAddress?: Maybe<AddressUpdateOneRequiredInput>;
+  shippingAddress?: Maybe<AddressUpdateOneInput>;
 }
 
 export interface OrderUpdateManyWithoutUserInput {
