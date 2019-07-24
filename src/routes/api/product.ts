@@ -24,4 +24,28 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const product = await prisma.product({ id }).$fragment(`
+        fragment ProductWithImage on Product {
+          id
+          name
+          desc
+          price
+          image {
+            id
+            src
+            alt
+          }
+        }
+  `);
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: "Internal Server Error" }] });
+  }
+});
+
 export default router;
