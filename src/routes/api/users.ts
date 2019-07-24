@@ -10,10 +10,12 @@ router.post("/", async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   // See if user exists
+
   const userExists = await prisma.$exists.user({ email });
   if (userExists) {
-    res.status(400).json({ errors: [{ msg: "User already exists" }] });
+    res.status(400).json({ errors: [{ msg: "User Already Exists" }] });
   }
+
   // Hash the password
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);

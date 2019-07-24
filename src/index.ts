@@ -5,7 +5,7 @@ import cors from "cors";
 // Routes
 import usersRoutes from "./routes/api/users";
 import authRoutes from "./routes/api/auth";
-
+import productRoutes from "./routes/api/product";
 const app = express();
 // Init Middleware
 
@@ -15,6 +15,7 @@ app.use(cors());
 // Define Routes
 app.use("/api/users", usersRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/product", productRoutes);
 
 const PORT = process.env.PORT || 5000;
 
